@@ -16,7 +16,7 @@
       <ListBox 
         v-model="selectedUser" 
         :options="onlineUsers" 
-        optionLabel="name"
+        optionLabel="nickname"
         :listStyle="{ 
           'max-height': 'calc(100vh - 180px)',
           'overflow-y': 'auto'
@@ -25,9 +25,21 @@
       >
         <template #option="slotProps">
           <div class="user-item" @click="openChat(slotProps.option)">
- 
-            <span class="user-name">{{ slotProps.option.name }}</span>
-    
+            <Avatar 
+              :label="slotProps.option.nickname.charAt(0)" 
+              class="user-avatar"
+              :style="{ 
+                'background-color': stringToColor(slotProps.option.nickname),
+                'color': 'white'
+              }"
+            />
+            <span class="user-name">{{ slotProps.option.nickname }}</span>
+            <Badge 
+              v-if="slotProps.option.id === currentUserId" 
+              value="Tú" 
+              severity="info" 
+              class="status-badge"
+            />
           </div>
         </template>
         <template #empty>
@@ -49,44 +61,51 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, defineProps, defineEmits } from 'vue';
 import Sidebar from 'primevue/sidebar';
 import ListBox from 'primevue/listbox';
 import Button from 'primevue/button';
+import Avatar from 'primevue/avatar';
+import Badge from 'primevue/badge';
+
+const props = defineProps({
+  onlineUsers: {
+    type: Array,
+    required: true
+  },
+  currentUserId: {
+    type: String,
+    required: true
+  }
+});
 
 const emit = defineEmits(['open-chat']);
 
 const sidebarVisible = ref(false);
 const selectedUser = ref(null);
 
-const onlineUsers = ref([
-  { id: 1, name: 'Usuario 1', avatar: 'url_avatar1', status: 'online' },
-  { id: 2, name: 'Usuario 2', avatar: 'url_avatar2', status: 'online' },
-  { id: 3, name: 'Usuario 3', avatar: 'url_avatar3', status: 'online' },
-  { id: 4, name: 'Usuario 4', avatar: 'url_avatar4', status: 'online' },
-  { id: 5, name: 'Usuario 5', avatar: 'url_avatar5', status: 'online' },
-  { id: 6, name: 'Usuario 6', avatar: 'url_avatar6', status: 'online' },
-]);
-
-const getStatusSeverity = (status) => {
-  const statusMap = {
-    online: 'success',
-    away: 'warning',
-    busy: 'danger',
-    offline: 'secondary'
-  };
-  return statusMap[status] || 'info';
-};
-
 const openChat = (user) => {
-  if (user.status === 'offline') return;
-  
-  emit('open-chat', user);
+  if (user.id === props.currentUserId) return;
+  emit('open-chat', user.id);
   sidebarVisible.value = false;
 };
 
 const onSidebarHide = () => {
   selectedUser.value = null;
+};
+
+// Función para generar color a partir de string
+const stringToColor = (str) => {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  let color = '#';
+  for (let i = 0; i < 3; i++) {
+    const value = (hash >> (i * 8)) & 0xFF;
+    color += ('00' + value.toString(16)).substr(-2);
+  }
+  return color;
 };
 </script>
 

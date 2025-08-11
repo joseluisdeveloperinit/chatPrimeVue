@@ -10,14 +10,31 @@
               variant="filled" 
               class="input-field"
               placeholder=""
+              @keyup.enter="sendMessage"
             />
             <label for="in_label">Send message</label>
           </FloatLabel>
+          
+          <Button 
+            icon="pi pi-image" 
+            class="send-button"
+            @click="triggerFileInput"
+          />
+          
+          <input 
+            type="file" 
+            ref="fileInput" 
+            @change="handleFileSelect"
+            accept="image/*"
+            style="display: none"
+          >
+          
           <Button 
             icon="pi pi-send" 
             class="send-button" 
             @click="sendMessage" 
           />
+          
           <Button 
             icon="pi pi-cog" 
             class="send-button" 
@@ -25,6 +42,7 @@
             aria-haspopup="true"
             aria-controls="options_menu" 
           />
+          
           <Menu 
             id="options_menu" 
             ref="menu" 
@@ -34,7 +52,6 @@
         </div>
       </template>
     </Toolbar>
-
     <!-- Diálogo para cambiar nickname -->
     <Dialog 
       v-model:visible="nicknameDialogVisible"
@@ -122,6 +139,9 @@
 <script setup>
 import { ref } from 'vue';
 
+const emit = defineEmits(['send-message', 'send-image']);
+
+
 // Estados para los diálogos
 const nicknameDialogVisible = ref(false);
 const uploadDialogVisible = ref(false);
@@ -157,16 +177,31 @@ const items = ref([
   }
 ]);
 
+
+const sendMessage = () => {
+  if (message.value.trim()) {
+    emit('send-message', message.value.trim());
+    message.value = '';
+  }
+};
+
+const triggerFileInput = () => {
+  fileInput.value.click();
+};
+
+const handleFileSelect = (e) => {
+  const file = e.target.files[0];
+  if (file) {
+    emit('send-image', file);
+    e.target.value = ''; // Reset input para permitir la misma imagen otra vez
+  }
+};
+
 const toggleMenu = (event) => {
   menu.value.toggle(event);
 };
 
-const sendMessage = () => {
-  if (message.value.trim()) {
-    alert(`Mensaje enviado: ${message.value}`);
-    message.value = '';
-  }
-};
+
 
 const saveNickname = () => {
   if (newNickname.value.trim()) {
