@@ -65,9 +65,9 @@ export default {
     gap: 12px;
     padding: 16px;
     height: 100%;
-    overflow-y: auto;
-    background: #2d1e1e;
     overflow-y: auto; /*este es el bueno para quitar el doble scroll */
+    background: #332d2d;
+
 }
 
 .message {
@@ -96,7 +96,6 @@ export default {
 .message--image {
     background: transparent;
     padding: 0;
-    max-width: 80%;
 }
 
 .message-meta {
@@ -113,7 +112,7 @@ export default {
 }
 
 .time {
-    color: #8888aa;
+    color: #d9d9f1;
     margin-left: 10px;
 }
 
@@ -129,7 +128,6 @@ export default {
 }
 
 .image-message img {
-    max-width: 100%;
     max-height: 300px;
     border-radius: 8px;
     border: 1px solid #3a3a4d;
@@ -141,6 +139,31 @@ export default {
     font-size: 0.8rem;
     color: #a0a0c0;
     padding: 0 4px;
+}
+
+.chat-container {
+    /* Mantén tus estilos existentes... */
+    scrollbar-width: thin; /* Para Firefox */
+    scrollbar-color: #6EE7B7 #2d2d3d; /* thumb y track */
+}
+
+/* Para navegadores WebKit (Chrome, Safari, Edge) */
+.chat-container::-webkit-scrollbar {
+    width: 8px; /* Ancho de la barra vertical */
+}
+
+.chat-container::-webkit-scrollbar-track {
+    background: #2d2d3d; /* Color del track (fondo) */
+    border-radius: 4px;
+}
+
+.chat-container::-webkit-scrollbar-thumb {
+    background: #4a3a78; /* Color del thumb (barra) */
+    border-radius: 4px;
+}
+
+.chat-container::-webkit-scrollbar-thumb:hover {
+    background: #6ee7b7; /* Color al pasar el mouse */
 }
 
 </style>

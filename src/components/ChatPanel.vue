@@ -28,7 +28,6 @@ defineProps({
 <style scoped>
 .card {
     height: 100%;
-    width: 100%;
 }
 
 .message-container {

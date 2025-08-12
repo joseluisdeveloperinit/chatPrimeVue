@@ -470,19 +470,16 @@ export default {
 .chat-content {
     display: flex;
     flex-direction: column;
-    width: 100%;
 }
 
 .bottom-tab {
     position: relative; /* Cambia de absolute/fixed a relative */
-    width: 100%;
 }
 
 .chat-panel {
     display: flex;
     flex-direction: column;
     height: calc(100vh - 150px); /* Ajusta según tu layout */
-    width: 100%;
 }
 
 
