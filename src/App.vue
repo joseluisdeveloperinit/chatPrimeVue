@@ -13,5 +13,17 @@ export default {
 </script>
 
 <style>
-/* Estilos globales si los necesitas */
+/* Estilos globales */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+#app {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
 </style>
