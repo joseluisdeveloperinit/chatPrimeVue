@@ -60,65 +60,86 @@ export default {
 
 <style scoped>
 .chat-container {
-    padding: 10px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 12px;
+    padding: 16px;
+    height: 100%;
+    overflow-y: auto;
+    background: #2d1e1e;
+    overflow-y: auto; /*este es el bueno para quitar el doble scroll */
 }
 
 .message {
-    background: rgb(111, 104, 173);
-    color: #8a1818;
-    padding: 8px 12px;
-    border-radius: 10px;
-    max-width: 70%;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    background: #2d2d3d;
+    color: #ffffff;
+    padding: 12px 16px;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    word-break: break-word;
 }
 
 .message--own {
-    background: #498535;
-    margin-left: auto;
-    color: #8a1818;
-
+    background: #4a3a78;
+    /* margin-left: auto; */
+    border-bottom-right-radius: 4px;
 }
 
 .message--system {
-    background: #8a1818;
+    background: #333344;
+    margin: 0 auto;
     text-align: center;
     font-style: italic;
-    max-width: 100%;
-    color: #8a1818;
+    color: #a0a0c0;
+}
 
+.message--image {
+    background: transparent;
+    padding: 0;
+    max-width: 80%;
 }
 
 .message-meta {
-    font-size: 0.75rem;
-    color: #555;
-    margin-bottom: 4px;
     display: flex;
     justify-content: space-between;
+    margin-bottom: 6px;
+    font-size: 0.8rem;
+    color: #a0a0c0;
+}
+
+.sender {
+    font-weight: 600;
+    color: #6ee7b7;
+}
+
+.time {
+    color: #8888aa;
+    margin-left: 10px;
 }
 
 .message-content {
     font-size: 0.95rem;
+    line-height: 1.4;
 }
 
 .image-message {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 6px;
 }
 
 .image-message img {
     max-width: 100%;
-    max-height: 200px;
-    border-radius: 4px;
+    max-height: 300px;
+    border-radius: 8px;
+    border: 1px solid #3a3a4d;
 }
 
 .image-meta {
-    font-size: 0.75rem;
-    color: #555;
     display: flex;
     justify-content: space-between;
+    font-size: 0.8rem;
+    color: #a0a0c0;
+    padding: 0 4px;
 }
 </style>
