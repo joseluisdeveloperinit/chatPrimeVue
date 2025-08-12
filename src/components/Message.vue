@@ -142,4 +142,5 @@ export default {
     color: #a0a0c0;
     padding: 0 4px;
 }
+
 </style>

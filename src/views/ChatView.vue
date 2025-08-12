@@ -18,14 +18,14 @@
                     </template>
                     <div class="chat-content">
                         <div class="chat-panel">
-                            <Message :messages="tab.messages" :currentUserId="currentUserId"
-                                :ref="el => setMessageRef(el, tab.id)" />
-                        </div>
-                        <div class="bottom-tab">
-                            <BottomTab v-if="tab.isGeneral" @send-message="sendPublicMessage"
+                            <div class="messages-container">
+                                <Message :messages="tab.messages" :currentUserId="currentUserId"
+                                    :ref="el => setMessageRef(el, tab.id)" />
+                            </div>
+                            <BottomTab v-if="tab.isGeneral" @send-message="sendPublicMessage" class="bottom-tab"
                                 @send-image="handleImageUpload" />
                             <BottomTab v-else @send-message="(msg) => sendPrivateMessage(tab.userId, msg)"
-                                @send-image="(file) => sendPrivateImage(tab.userId, file)" />
+                                class="bottom-tab" @send-image="(file) => sendPrivateImage(tab.userId, file)" />
                         </div>
                     </div>
                 </TabPanel>
@@ -428,7 +428,10 @@ export default {
     right: 1px;
     z-index: 10;
 }
-
+.messages-container {
+    flex: 1;    
+    height: 100%;
+}
 
 .tab-header {
     display: flex;
@@ -436,7 +439,7 @@ export default {
     gap: 0.5rem;
     padding: 0.5rem;
     position: relative;
-    padding-right: 24px;  
+    padding-right: 24px;
 
 }
 
@@ -452,8 +455,6 @@ export default {
 
 .chat-container {
     display: flex;
-    height: 100vh;
-    position: relative;
 }
 
 .main-content {
@@ -464,31 +465,26 @@ export default {
 
 .sidebar-component {
     position: relative;
-    height: 100%;
 }
 
 .chat-content {
-    transition: margin-left 0.3s ease;
     display: flex;
     flex-direction: column;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
+    width: 100%;
 }
 
 .bottom-tab {
-    position: fixed;
-    bottom: 0;
-    z-index: 1000;
+    position: relative; /* Cambia de absolute/fixed a relative */
     width: 100%;
 }
 
 .chat-panel {
-    width: 70%;
-    flex: 1;
-    height: calc(100vh - 150px);
-    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 150px); /* Ajusta según tu layout */
+    width: 100%;
 }
+
 
 :deep(.custom-tabview) {
     width: 100%;

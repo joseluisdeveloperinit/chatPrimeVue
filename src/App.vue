@@ -14,16 +14,14 @@ export default {
 
 <style>
 /* Estilos globales */
+
 body, html {
     margin: 0;
     padding: 0;
-    height: 100%;
     overflow: hidden;
+    height: 100%;
 }
 
-#app {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
+
+
 </style>
