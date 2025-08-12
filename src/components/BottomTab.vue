@@ -15,11 +15,7 @@
             <label for="in_label">Send message</label>
           </FloatLabel>
           
-          <Button 
-            icon="pi pi-image" 
-            class="send-button"
-            @click="triggerFileInput"
-          />
+   
           
           <input 
             type="file" 
@@ -35,13 +31,27 @@
             @click="sendMessage" 
           />
           
+                 <Button 
+            icon="pi pi-image" 
+            class="send-button"
+            @click="showUploadDialog"
+          />
+
+                    <Button 
+            icon="pi pi-user" 
+            class="send-button" 
+            @click="showChangeNickname" 
+            aria-haspopup="true"
+            aria-controls="options_menu" 
+          />
+<!--           
           <Button 
             icon="pi pi-cog" 
             class="send-button" 
             @click="toggleMenu" 
             aria-haspopup="true"
             aria-controls="options_menu" 
-          />
+          /> -->
           
           <Menu 
             id="options_menu" 
@@ -176,6 +186,16 @@ const items = ref([
     }
   }
 ]);
+
+const showUploadDialog = () => {
+      uploadDialogVisible.value = true;
+      resetFileInput();
+};
+
+const showChangeNickname = () => {
+      nicknameDialogVisible.value = true;
+      newNickname.value = '';
+};
 
 
 const sendMessage = () => {

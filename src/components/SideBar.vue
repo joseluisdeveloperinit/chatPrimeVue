@@ -61,7 +61,7 @@
 </template>
 
 <script setup>
-import { ref, defineProps, defineEmits } from 'vue';
+import { ref} from 'vue';
 import Sidebar from 'primevue/sidebar';
 import ListBox from 'primevue/listbox';
 import Button from 'primevue/button';
